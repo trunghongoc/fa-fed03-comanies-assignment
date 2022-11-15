@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 export const Users = () => {
   const [users, setUsers] = useState<any>([]);
@@ -40,6 +40,7 @@ export const Users = () => {
             <th>Name</th>
             <th>UserName</th>
             <th>Email</th>
+            <th>Action</th>
           </tr>
         </thead>
 
@@ -52,6 +53,10 @@ export const Users = () => {
                 <Link to={`/users/${user.id}`}>{user.username}</Link>
               </td>
               <td>{user.email}</td>
+              <td>
+                <Link to={`/users/${user.id}`}>View detail</Link> |
+                <Link to={`/users/${user.id}/edit`}>Edit</Link>
+              </td>
             </tr>
           ))}
 
@@ -62,6 +67,9 @@ export const Users = () => {
           )}
         </tbody>
       </table>
+
+      {/* vi tri hien thi user detail */}
+      <Outlet />
     </div>
   );
 };

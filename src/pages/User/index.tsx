@@ -1,4 +1,4 @@
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -6,8 +6,16 @@ export const User = () => {
   const [user, setUser] = useState<any>(null);
   const params = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
 
-  console.log(params);
+  const queries = {
+    name: searchParams.get("name"),
+    age: searchParams.get("age"),
+    hhh: searchParams.get("hhh"),
+  };
+
+  console.log("searchParams", queries);
 
   const fetchUser = async (id: string | undefined) => {
     try {
@@ -30,13 +38,8 @@ export const User = () => {
     //   });
   };
 
-  const fetchMe = () => {
-    axios.get("http://localhost:3002/user");
-  };
-
   useEffect(() => {
     fetchUser(params.id);
-    fetchMe();
   }, [params]);
 
   return (

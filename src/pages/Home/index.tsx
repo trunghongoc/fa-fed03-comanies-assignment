@@ -7,8 +7,11 @@ export const Home = () => {
 
       <div>
         <Link to="/users">Go to Users</Link> |
-        <Link to="/posts">Go to Users</Link>
+        <Link to="/users/create">Go to Users create</Link> |
+        <Link to="/posts">Go to Posts</Link>
       </div>
     </div>
   );
 };
+
+export default Home;
