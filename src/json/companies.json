@@ -1,0 +1,42 @@
+{
+  "companies": [
+    {
+      "id": 1,
+      "name": "FPT software",
+      "email": "fpt@fsoft.com.vn",
+      "headQuarter": {
+        "province": 4,
+        "district": 8
+      },
+      "customers": [
+        { "id": 2, "description": "Best customer" },
+        { "id": 6, "description": "Acceptabled customer" }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "FPT Retail",
+      "email": "retail@fpt.vn",
+      "headQuarter": {
+        "province": 3,
+        "district": 5
+      },
+      "customers": [{ "id": 1, "description": "The customer is so nice" }]
+    },
+    {
+      "id": 3,
+      "name": "FPT Education",
+      "email": "fpt@edu.com.vn",
+      "headQuarter": {
+        "province": 2,
+        "district": 1
+      },
+      "customers": [
+        { "id": 3, "description": "Rich customer" },
+        { "id": 4, "description": "We don't like them" },
+        { "id": 5, "description": "So good to connect them" }
+      ]
+    }
+  ],
+  "total": 3
+}

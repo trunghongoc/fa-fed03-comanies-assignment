@@ -1,0 +1,18 @@
+{
+  "provinces": [
+    { "id": 2, "name": "Hà Nội" },
+    {
+      "id": 3,
+      "name": "Đà Nẵng"
+    },
+    {
+      "id": 4,
+      "name": "Bình Định"
+    },
+    {
+      "id": 5,
+      "name": "Hồ Chí Minh"
+    }
+  ],
+  "total": 4
+}

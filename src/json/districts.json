@@ -1,0 +1,22 @@
+{
+  "districts": [
+    { "id": 1, "name": "Cầu Giấy", "provinceId": 2 },
+    { "id": 2, "name": "Long Biên", "provinceId": 2 },
+    { "id": 3, "name": "Hai Bà Trưng", "provinceId": 2 },
+    { "id": 4, "name": "Tây Hồ", "provinceId": 2 },
+
+    { "id": 5, "name": "Hải Châu", "provinceId": 3 },
+    { "id": 6, "name": "Cẩm Lệ", "provinceId": 3 },
+    { "id": 7, "name": "Thanh Khê", "provinceId": 3 },
+
+    { "id": 8, "name": "Quy Nhơn", "provinceId": 4 },
+    { "id": 9, "name": "An Lão", "provinceId": 4 },
+    { "id": 10, "name": "Phù Cát", "provinceId": 4 },
+
+    { "id": 11, "name": "Tân Phú", "provinceId": 5 },
+    { "id": 12, "name": "Gò Vấp", "provinceId": 5 },
+    { "id": 13, "name": "Quận 6", "provinceId": 5 },
+    { "id": 14, "name": "Phú Nhuận", "provinceId": 5 }
+  ],
+  "total": 14
+}

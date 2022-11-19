@@ -17,6 +17,9 @@ import { NotFound } from "./pages/NotFound";
 import { Header } from "./components/Header";
 import { Todo } from "./pages/Todo";
 import { PrivateRoute } from "./components/PrivateRoute";
+import { Bootstrap } from "./pages/Bootstrap";
+import { Companies } from "./pages/Companies";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Home = lazy(() => import("./pages/Home"));
 
@@ -64,6 +67,14 @@ const routes = createBrowserRouter([
   {
     path: "todo",
     element: <Todo />,
+  },
+  {
+    path: "bootstrap",
+    element: <Bootstrap />,
+  },
+  {
+    path: "companies",
+    element: <Companies />,
   },
 
   {

@@ -4,6 +4,7 @@ import {
   FormikProvider,
   FieldArray,
   FieldArrayRenderProps,
+  FormikErrors,
 } from "formik";
 import { ErrorMessage } from "./style";
 import * as Yup from "yup";
@@ -59,31 +60,39 @@ export const UserCreate = () => {
 
   const validationSchema = Yup.object({
     password: Yup.string()
-      .max(3, "Must be 3 characters or less")
+      .min(3, "Must be 3 characters or greater than")
       .required("Ban chua nhap pwd"),
     email: Yup.string()
       .email("Email khong hop le")
       .required("Ban chua nhap email"),
     address: Yup.object()
       .shape({
-        provice: Yup.string().required(),
+        province: Yup.string().required(),
         district: Yup.string().required(),
       })
       .required(),
+    friends: Yup.array()
+      .of(
+        Yup.object({
+          id: Yup.number().required(),
+          name: Yup.string().required(),
+        })
+      )
+      .min(1),
   });
 
   const formik = useFormik<IFormData>({
     initialValues: {
-      email: "",
-      password: "",
+      email: "a@a.com",
+      password: "123456",
       address: {
-        province: "",
-        district: "",
+        province: "Ha noi",
+        district: "Cau giay",
       },
       friends: [],
     },
     // validateOnMount: true,
-    // validationSchema,
+    validationSchema,
     onSubmit,
   });
 
@@ -124,11 +133,11 @@ export const UserCreate = () => {
     });
   };
 
-  useEffect(() => {
-    setTimeout(() => {
-      setValuesAfterCallAPI();
-    }, 2000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setValuesAfterCallAPI();
+  //   }, 2000);
+  // }, []);
 
   return (
     <div>
@@ -136,6 +145,9 @@ export const UserCreate = () => {
 
       <FormikProvider value={formik}>
         <form onSubmit={formik.handleSubmit}>
+          <pre>
+            <>{console.log("-Errors", formik.errors)}</>
+          </pre>
           <p>Email:</p>
           <input
             type="email"
@@ -159,16 +171,15 @@ export const UserCreate = () => {
           )}
 
           <p>Province:</p>
-          <textarea
+          <input
             name="address['province']"
             value={formik.values.address.province}
             onChange={formik.handleChange}
-            cols={30}
-            rows={10}
-          ></textarea>
-          {formik.errors.address?.province && (
-            <ErrorMessage>{formik.errors.address?.province}</ErrorMessage>
-          )}
+          />
+          {formik.errors.address?.province &&
+            formik.touched.address?.province && (
+              <ErrorMessage>{formik.errors.address?.province}</ErrorMessage>
+            )}
 
           <p>District:</p>
           <input
@@ -177,6 +188,10 @@ export const UserCreate = () => {
             value={formik.values.address.district}
             onChange={formik.handleChange}
           />
+          {formik.errors.address?.district &&
+            formik.touched.address?.district && (
+              <ErrorMessage>{formik.errors.address?.district}</ErrorMessage>
+            )}
 
           <p>Friends:</p>
           <FieldArray name="friends">
@@ -203,6 +218,29 @@ export const UserCreate = () => {
                         value={formik.values.friends[index].id}
                         onChange={formik.handleChange}
                       />
+                      {/* {formik.errors.friends[index].id &&
+                        formik.touched.friends[index].id && (
+                          <ErrorMessage>
+                            {formik.errors.friends[index.id]}
+                          </ErrorMessage>
+                        )} */}
+                      {typeof formik.errors.friends?.[index] === "object" &&
+                        (
+                          formik.errors.friends?.[
+                            index
+                          ] as FormikErrors<IFriend>
+                        )?.id &&
+                        formik.touched.friends?.[index]?.id && (
+                          <ErrorMessage>
+                            {
+                              (
+                                formik.errors.friends?.[
+                                  index
+                                ] as FormikErrors<IFriend>
+                              ).id
+                            }
+                          </ErrorMessage>
+                        )}
 
                       <input
                         type="text"
@@ -210,6 +248,23 @@ export const UserCreate = () => {
                         value={formik.values.friends[index].name}
                         onChange={formik.handleChange}
                       />
+                      {typeof formik.errors.friends?.[index] === "object" &&
+                        (
+                          formik.errors.friends?.[
+                            index
+                          ] as FormikErrors<IFriend>
+                        )?.name &&
+                        formik.touched.friends?.[index]?.name && (
+                          <ErrorMessage>
+                            {
+                              (
+                                formik.errors.friends?.[
+                                  index
+                                ] as FormikErrors<IFriend>
+                              )?.name
+                            }
+                          </ErrorMessage>
+                        )}
                       <button onClick={(event) => removeFriend(event, index)}>
                         XOA friend
                       </button>
@@ -219,6 +274,11 @@ export const UserCreate = () => {
               </>
             )}
           </FieldArray>
+          {formik.errors.friends &&
+            typeof formik.errors.friends === "string" &&
+            formik.touched.friends && (
+              <ErrorMessage>{formik.errors.friends}</ErrorMessage>
+            )}
 
           <button>Submit</button>
         </form>

@@ -1,0 +1,21 @@
+array: chứa các companies (state: companies)
+Format data, tạo 1 (useMemo: companiesFormated)
+render ra table: (useMemo: companiesFormated)
+
+Tính năng xóa 1 company
+- Click vào button xóa
+- Xác định xem là muốn xóa item nào
+- show modal lên, để chọn yes no
+  - Xác định xem là muốn xóa item nào
+  - và lưu vào đâu đấy (state: selectedDeleteCompany)
+
+- Chọn No:
+  - ĐÓng modal đi
+- Chọn Yes:
+  - Xóa 1 item ở trong (state: companies)
+    - Filter (state: companies) bỏ đi (state: selectedDeleteCompany)
+  - Set lại (state: companies)
+  - Bảng tự động được render lại
+  - Đóng modal đi
+
+
